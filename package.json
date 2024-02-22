@@ -8,10 +8,25 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "chokidar": "^3.5.3",
     "core-js": "^3.6.5",
-    "element-ui": "^2.13.2",
+    "echarts": "^4.9.0",
+    "echarts-gl": "^1.1.0",
+    "element-ui": "^2.15.7",
+    "file-saver": "^2.0.5",
+    "font-awesome": "^4.7.0",
+    "html2canvas": "^1.4.1",
+    "jszip": "^3.10.1",
+    "less": "^3.0.0",
+    "less-loader": "^5.0.0",
+    "mockjs": "^1.1.0",
+    "qs": "^6.11.2",
+    "swiper": "^5.4.5",
+    "vant": "^2.13.0",
     "vue": "^2.6.11",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-router": "^3.2.0",
+    "vue-waterfall2": "^2.0.7",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
@@ -19,6 +34,21 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "vue-template-compiler": "^2.6.11"
-  }
+    "sass": "^1.69.5",
+    "sass-loader": "^10.5.1",
+    "vue-template-compiler": "^2.6.11",
+    "vue-waterfall-easy": "^2.4.4"
+  },
+  "description": "大家可以帮忙点个start嘛，谢谢大家了~\r #### 效果图\r ![输入图片说明](https://images.gitee.com/uploads/images/2020/1026/111148_7a73a337_7881314.png \"M7J7_AO%[7$O5782QG~V]]S.png\")\r ![输入图片说明](https://images.gitee.com/uploads/images/2020/1026/111222_c11e1538_7881314.png \"9L2[CW6H)86)94V]U50LSFG.png\")\r ![输入图片说明](https://images.gitee.com/uploads/images/2020/1026/111259_4d042be2_7881314.png \"1OA%O}P8X_X`1ZTE~4OL(%A.png\")\r 更多效果图就不放了太大了\r 具体看B站视频演示地址：[视频演示](https://www.bilibili.com/video/BV17y4y1y7Wm)\r #### 介绍\r 网页音乐平台\r 本人小白一枚，能做出来最重要的还是坚持不懈的啃代码吧，遇到的问题也多，也是自己百度，自己问前辈的，感谢那些为我解答的前辈和大佬们。\r 学习了codewhy老师的vue自己动手拿网易云的接口做了一个音乐网页平台\r 断断续续做了半个月吧，也没有完全把全部功能实现，bug也还是存在的，后续有时间会持续更新完善功能和bug的修复，如果有大佬想参与一起构建的话可私聊我获取权限。\r 联系方式：QQ：2372966718 微信：k2372966718 找不到的话就 13479636407\r #### 软件架构\r 软件架构说明\r 文件具体分类是啥我都截图了并写了注释，有需要想练此项目的可联系我。\r 里面代码重要部分我都注释说明了 不理解可以慢慢推敲\r #### 安装教程",
+  "main": "babel.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kzj0916/KzjMusicxindong.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kzj0916/KzjMusicxindong/issues"
+  },
+  "homepage": "https://github.com/kzj0916/KzjMusicxindong#readme"
 }

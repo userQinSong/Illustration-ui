@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 // import * as type from './mutationType'
-import modulesOne from './modules/modulesOne'
 import mutations from './mutations'
 import getters from './getters'
 import actions from './actions'
+import path from "@/store/modules/path";
+import illustration from "@/store/modules/illustration";
 Vue.use(Vuex)
 
 const state = {
@@ -24,6 +25,7 @@ export default new Vuex.Store({
   getters,
   actions,
   modules: {
-    modulesOne,
+    path,
+    illustration
   }
 })

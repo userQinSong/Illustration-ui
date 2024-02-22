@@ -21,7 +21,7 @@ export default {
                 this.isShow = false;
                 this.message = '';
             },time)
-        }
+        },
     }
     }
 

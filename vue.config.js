@@ -24,7 +24,37 @@ module.exports = {
                 pathRewrite: {
                     '^/api': ''
                 }
-            }
+            },
+            '/loc': {
+              // 此处的写法，目的是为了 将 /api 替换成 https://autumnfish.cn/
+              target: 'http://localhost:28019',
+              // 允许跨域
+              changeOrigin: true,
+              ws: true,
+              pathRewrite: {
+                '^/loc': '/api'
+              }
+            },
+            '/cigar_shop': {
+              // 此处的写法，目的是为了 将 /api 替换成 https://autumnfish.cn/
+              target: 'http://localhost:29001',
+              // 允许跨域
+              changeOrigin: true,
+              ws: true,
+              pathRewrite: {
+                '^/cigar_shop': '/api'
+              }
+            },
+            '/illustration': {
+              // 此处的写法，目的是为了 将 /api 替换成 https://autumnfish.cn/
+              target: 'http://localhost:29001',
+              // 允许跨域
+              changeOrigin: true,
+              ws: true,
+              pathRewrite: {
+                '^/illustration': '/api'
+              }
+            },
         }
     }
 };

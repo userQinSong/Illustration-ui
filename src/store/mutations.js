@@ -40,5 +40,4 @@ export default {
     [SET_PLAY](state, flag) {
         state.isPlaying = flag;
     },
-
 }

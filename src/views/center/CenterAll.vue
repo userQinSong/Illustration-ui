@@ -1,35 +1,92 @@
 <template>
-  <div class="centerall">
-    <el-container class="ct-container">
-      <el-aside width="220px" style="background-color: rgb(238, 241, 246)">
-        <LeftMenu></LeftMenu>
-      </el-aside>
-      <div class="con-all" v-loading="false">
-        <!-- <RightTop> </RightTop> -->
-        <transition :name="transitionName">
-          <keep-alive exclude="SongList,AnchorList,SingerMenu,SingerMvVideo,AlbumList">
-            <router-view></router-view>
-          </keep-alive>
-        </transition>
-      </div>
-    </el-container>
+  <div class="centerall" v-loading="tag_loading || type_loading" v-if="!tag_loading && !type_loading">
+<!--    <LeftNav class="left-side"/>-->
+    <LeftNav/>
+    <div class="con-all">
+      <!-- <RightTop> </RightTop> -->
+      <transition :name="transitionName">
+        <keep-alive include="MainPage" exclude="PicoltDetailPage,PersonalPage">
+          <router-view :key="key" v-if="routerAlive"></router-view>
+        </keep-alive>
+      </transition>
+    </div>
   </div>
 </template>
 
 <script>
-import LeftMenu from "views/left/LeftMenu";
-// import RightTop from "views/right/RightTop";
+import LeftNav from "views/left/LeftNav";
+import RightRouteBar from "@/views/center/RightRouteBar";
+import {getTagList, getTypeList} from "@/network/illustration/cats";
 export default {
   name: "CenterAll",
   components: {
-    LeftMenu,
+    LeftNav,
+    RightRouteBar,
   },
   data() {
     return {
       transitionName: "",
+      timeLineHeight: "",
+      routerAlive: true,
+      tag_loading:true,
+      type_loading:true
     };
   },
-  methods: {},
+  provide(){
+    return{
+      routerRefresh: this.routerRefresh
+    }
+  },
+  created() {
+    this.$bus.$on('goRoute',(param)=>{
+      this.goRoute(param)
+    })
+    getTagList().then(res=>{
+      if(res.code === 200){
+        console.log("获取tag_list成功！",res.data)
+        this.$store.commit("illustration/setTagList",res.data)
+        this.$nextTick(()=>{
+          this.tag_loading = false;
+        })
+      }else{
+        console.log("获取tag_list失败！")
+      }
+    })
+    getTypeList().then(res=>{
+      if(res.code === 200){
+        console.log("获取type_list成功！",res.data)
+        this.$store.commit("illustration/setTypeList",res.data)
+        this.$nextTick(()=>{
+          this.type_loading = false;
+        })
+      }else{
+        console.log("获取type_list失败！")
+      }
+    })
+  },
+  methods: {
+    routerRefresh(){
+      this.routerAlive = false;
+      this.$nextTick(()=>{
+        this.routerAlive = true;
+      });
+    },
+    goRoute(routeObj){
+      this.$router.push(routeObj);
+      this.routerRefresh()
+    }
+  },
+  mounted() {
+    this.timeLineHeight = document.documentElement.clientHeight - 100;
+    window.onresize = () => {
+      this.timeLineHeight = document.documentElement.clientHeight - 100;
+    };
+  },
+  computed: {
+    key() {
+      return this.$route.name !== undefined? this.$route.name +new Date(): this.$route +new Date()
+    }
+  },
   watch: {
     //使用watch 监听$router的变化
     $route(to, from) {
@@ -39,7 +96,7 @@ export default {
         //设置动画名称
         this.transitionName = "slide-left";
         return;
-      } 
+      }
       if(to.meta.index == 0 && to.meta.index < from.meta.index){
         this.transitionName = "slide-right";
       }
@@ -59,6 +116,15 @@ export default {
 };
 </script>
 <style >
+/*滚动条样式*/
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 255, 0.1);
+  border-radius: 3px;
+}
 /* 动画效果 */
 .slide-right-enter-active,
 .slide-right-leave-active,
@@ -109,27 +175,39 @@ export default {
 .con-all {
   position: relative;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  max-height: 680px;
-  /* border-bottom: 1px solid red; */
-  /* justify-content: space-between; */
+  height: 100%;
+  overflow: auto;
+  align-items: center;
+  background-color: white;
+  text-align: center;
+}
+
+.toBottom {
+  flex: 1;
+  width: 100%;
+  background-color: #409eff;
 }
 /* .rt-top{
     position: absolute;
     top: -43px;
-    
+
 } */
 .centerall {
   position: relative;
-  width: 100%;
-  max-height: 680px;
-  height: 680px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  height: 100vh;
+  overflow: auto;
+  max-width: 100vw;
+  margin: 0 auto;
+  /*max-height: 660px;*/
+  /*height: 660px;*/
 }
 .ct-container {
   width: 100%;
-  height: 680px;
-  border: 1px solid #eee;
+  /*height: 660px;*/
+  height: 100%;
 }
 .el-header {
   background-color: #b3c0d1;
@@ -140,13 +218,11 @@ export default {
 .el-aside {
   color: #333;
 }
-/* 滚动条样式 */
-::-webkit-scrollbar {
-  width: 8px;
-}
 
-::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 255, 0.1);
-  border-radius: 3px;
+.left-side {
+  width: auto;
+  padding: 0px;
+  margin: 0px;
+  border-right: 1px solid #EBEEF5;
 }
 </style>
